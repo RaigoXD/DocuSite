@@ -76,14 +76,25 @@ class File(TimeStampedModel):
         verbose_name="File name"
     )
 
-    url_file = models.URLField(
+    url_file = models.FileField(
+        upload_to='files',
         verbose_name = "File URL",
         null = True,
         blank = True
     )
 
     size_mb = models.FloatField(
-        verbose_name = "Size MB"
+        verbose_name = "Size MB",
+        null = True,
+        blank= True
+    )
+    
+    owner = models.ForeignKey(
+        'user.User',
+        on_delete=models.CASCADE,
+        verbose_name="Owner",
+        null= False,
+        blank=True
     )
 
     is_active = models.BooleanField(default = True)

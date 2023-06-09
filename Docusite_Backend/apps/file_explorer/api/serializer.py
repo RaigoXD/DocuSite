@@ -9,7 +9,7 @@ class TypeFileSerializer(serializers.ModelSerializer):
     class Meta:
         model = TypeFile
         fields = ('id','types','allow_formats','description', 'is_active')
-    
+
     def get_types(self, obj):
         return {
             'codigo': obj.types,
@@ -18,19 +18,19 @@ class TypeFileSerializer(serializers.ModelSerializer):
 
 
 class FileListSerializer(serializers.ModelSerializer):
-    
+
     type_file = serializers.SerializerMethodField()
-    
+
     class Meta:
         model = File
         fields = ('uuid', 'name', 'url_file', 'size_mb', 'created', 'type_file')
-        
+
     def get_type_file(self, obj):
         return obj.type_file.types
 
 
 class FileCreateUpdateSerializer(serializers.ModelSerializer):
-    
+
     folder_parent = serializers.SlugRelatedField(
         slug_field = 'uuid',
         queryset = File.objects.all(),
@@ -43,8 +43,13 @@ class FileCreateUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        fields = ('folder_parent','type_file','name','url_file','size_mb')
+        fields = ('folder_parent','type_file','name','url_file','size_mb', 'owner')
 
+    def save(self, **kwargs):        
+        self.validated_data['owner'] = self.context['request'].user
+        if self.validated_data.get('url_file', None):
+            self.validated_data['size_mb'] = self.validated_data['url_file'].size / 1024
+        return super().save(**kwargs)
 
 class FileRetriveDeleteSerializer(serializers.ModelSerializer):
 

@@ -1,0 +1,24 @@
+services:
+  docusite_backend:
+    build: ./Docusite_Backend
+    container_name: docusite_backend_container
+    command: sh -c 'python /home/app/manage.py migrate && python /home/app/manage.py runserver 0.0.0.0:8000'
+    ports:
+      - "5000:8000"
+    volumes:
+      - ./Docusite_Backend:/home/app
+    depends_on:
+      - db
+  db:
+    image: postgres:alpine
+    container_name: db-postgres
+    ports:
+      - 5439:5432
+    environment:
+      - POSTGRES_USER=rootpost
+      - POSTGRES_PASSWORD=rootpost
+      - POSTGRES_DB=docusite_db
+    volumes:
+      - docusite-db-volumen:/var/lib/postgresql/data
+volumes:
+  docusite-db-volumen:

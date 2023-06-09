@@ -13,9 +13,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'docusite_db',
-        'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': '0.0.0.0',
+        'USER': 'rootpost',
+        'PASSWORD': 'rootpost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

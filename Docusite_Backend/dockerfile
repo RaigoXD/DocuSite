@@ -1,0 +1,16 @@
+FROM python:3.9-alpine
+
+RUN apk add --no-cache tzdata
+ENV TZ America/Bogota
+
+RUN mkdir -p /home/app
+# Copy the requierements file
+COPY requirements.txt /home/app
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r /home/app/requirements.txt
+
+# Copy the project
+COPY . /home/app
+
+WORKDIR /home/app
+EXPOSE 8000
