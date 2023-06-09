@@ -121,12 +121,12 @@ USE_TZ = True
 
 
 # Simple JWT Configuration
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=400),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "TOKEN_OBTAIN_SERIALIZER": "apps.user.api.serializer.MyTokenObtainPairSerializer",
-
+    "ROTATE_REFRESH_TOKENS": False,
+    "UPDATE_LAST_LOGIN": True,
 }
 
 # Default primary key field type
