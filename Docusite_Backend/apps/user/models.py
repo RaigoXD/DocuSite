@@ -1,3 +1,4 @@
+from typing import Iterable, Optional
 import uuid
 
 from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
@@ -7,6 +8,7 @@ from django.db import models
 
 class UserManager(BaseUserManager):
     def _create_user(self, username, email, first_name,last_name, password, is_staff, is_superuser, **extra_fields):
+        print(password)
         user = self.model(
             username = username,
             email = email,
@@ -38,12 +40,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         (ROL_USER, 'USER')   
     )
 
-    rol = models.CharField(choices=ROLES,max_length=3,verbose_name='rol')
-    uuid = models.UUIDField(db_index=True,default=uuid.uuid4,editable=False,unique=True)
+    rol = models.CharField(choices= ROLES, max_length= 3, verbose_name= 'rol')
+    uuid = models.UUIDField(db_index= True, default= uuid.uuid4, editable= False, unique= True)
     username = models.CharField(max_length = 255, unique = True)
     email = models.EmailField('email',max_length = 255, unique = True,)
-    first_name = models.CharField('name', max_length = 255, blank = True, null = True)
-    last_name = models.CharField('last_name', max_length = 255, blank = True, null = True)
+    first_name = models.CharField('name', max_length = 255, null= False)
+    last_name = models.CharField('last_name', max_length = 255, null = False)
     is_active = models.BooleanField(default = True)
     is_staff = models.BooleanField(default = False) 
     objects = UserManager()
@@ -56,4 +58,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['email','first_name','last_name', 'rol']
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.username} {self.rol}'
+
+

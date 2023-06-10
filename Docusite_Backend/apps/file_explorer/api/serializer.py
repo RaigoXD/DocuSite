@@ -23,7 +23,7 @@ class FileListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        fields = ('uuid', 'name', 'url_file', 'size_mb', 'created', 'type_file')
+        fields = ('uuid', 'name', 'size_mb', 'created', 'type_file', 'folder_parent')
 
     def get_type_file(self, obj):
         return obj.type_file.types

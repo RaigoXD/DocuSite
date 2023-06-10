@@ -6,7 +6,21 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 class UserCreateUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('rol', 'username', 'email', 'first_name', 'last_name')
+        fields = ('rol', 'username', 'email', 'first_name', 'last_name', 'password')
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        del representation['password']
+        return representation
+    
+    def validate_rol(self, value):
+        if value is "SU":
+            raise serializers.ValidationError("User can not be SuperAdmin")
+        return value
+
+    def create(self, validated_data):
+        modelclass = self.Meta.model.objects.create_user(**validated_data)
+        return modelclass
 
 
 class UserListRetrieveDestroySerializer(serializers.ModelSerializer):
