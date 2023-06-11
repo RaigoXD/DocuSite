@@ -1,0 +1,40 @@
+
+<main class="center">
+    <mat-card class="login-card">
+        <mat-card-content class="login-container">
+           <section class="info-container">
+            <img src="../../assets/img/logoLogin.png" alt="logo" width="150" height="150">
+            <h1>Explorador de PDF</h1>
+           </section> 
+           <section class="login">
+            <img src="../../assets/img/logoLogin.png" alt="logo" width="150" height="150">
+            <h1>Inicio de sesion</h1>
+            <form [formGroup]="logInForm" class="form-container">
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Ingrese el usuario</mat-label>
+                    <input matInput formControlName="username">
+                </mat-form-field>
+                <mat-form-field class="form-field" appearance="outline">
+                    <mat-label>Ingrese su contrasena</mat-label>
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    </mat-form-field>
+            </form>
+            <button 
+                mat-raised-button 
+                class="login-button" 
+                color="primary"
+                (click)="onSubmit()"
+            >
+                Iniciar sesion
+            </button>
+            <div class="link-container">
+                <a href="#">Recuperar contrasena</a>
+                <a href="#">Crear cuenta</a>
+            </div>
+           </section>
+        </mat-card-content>
+    </mat-card>
+</main>
