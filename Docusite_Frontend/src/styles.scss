@@ -37,3 +37,27 @@ $Docusite_Frontend-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h1, p{
+  color: #676767;
+}
+
+.center{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #EEEEEE;
+}
+
+.login-card{
+  width: 80%;
+  height: 75%;
+}
+
+.content-container{
+  display: flex !important;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
