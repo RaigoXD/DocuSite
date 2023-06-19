@@ -1,1 +1,43 @@
-<p>create-account works!</p>
+<main class="center">
+    <mat-card class="login-card">
+        <mat-card-content class="content-container">
+            <section class="create-container">
+                <div class="back-button">
+                    <button mat-icon-button routerLink="/login">
+                        <mat-icon>keyboard_backspace</mat-icon>
+                    </button>
+                </div>
+                <section class="form-container">
+                    <h1>Crear cuenta</h1>
+                    <form [formGroup]="createForm" class="create-form">
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Correo electronico</mat-label>
+                            <input matInput formControlName="email">
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Apellido</mat-label>
+                            <input matInput formControlName="lastName">
+                        </mat-form-field>
+                        <mat-form-field class="form-field" appearance="outline">
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput formControlName="password">
+                        </mat-form-field>
+                    </form>
+                </section>
+                <div class="create-actions">
+                    <button mat-raised-button class="create-button">
+                        <mat-icon class="send-icon">library_add</mat-icon>Crear
+                    </button>
+                </div>
+            </section>
+            <section class="logo-container">
+                <img src="../../assets/img/logoLogin.png" alt="logo" width="150" height="150">
+                <h1>DocuSite</h1>
+               </section>
+        </mat-card-content>
+    </mat-card>
+</main>
